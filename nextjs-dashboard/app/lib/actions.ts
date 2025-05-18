@@ -35,7 +35,6 @@ export type State = {
 };
 
 export async function createInvoice(prevState: State, formData: FormData) {
-  // Validate form fields using Zod
   const validatedFields = CreateInvoice.safeParse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
@@ -95,14 +94,19 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
       WHERE id = ${id}
     `;
   } catch (error) {
+    console.error(error);
     return { message: 'Database Error: Failed to Update Invoice.' };
   }
 
   revalidatePath('/dashboard/invoices');
-  return { message: 'Invoice updated successfully.' };
+  redirect('/dashboard/invoices');
 }
 
 export async function deleteInvoice(id: string) {
-  await sql`DELETE FROM invoices WHERE id = ${id}`;
-  revalidatePath('/dashboard/invoices');
+  // Simulate an error for testing error boundaries
+  throw new Error('Failed to Delete Invoice');
+
+  // Unreachable code block
+  // await sql`DELETE FROM invoices WHERE id = ${id}`;
+  // revalidatePath('/dashboard/invoices');
 }
