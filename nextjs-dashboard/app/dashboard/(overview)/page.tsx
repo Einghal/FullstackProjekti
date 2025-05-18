@@ -4,6 +4,7 @@ import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import {RevenueChartSkeleton,LatestInvoicesSkeleton,CardsSkeleton,} from '@/app/ui/skeletons';
+import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 export default async function Page() {
   return (
@@ -27,3 +28,6 @@ export default async function Page() {
     </main>
   );
 }
+
+// Remove these lines if not used:
+// const deleteInvoiceWithId = deleteInvoice.bind(null, id);
